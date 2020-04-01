@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "On branch "$(git rev-parse --abbrev-ref HEAD)
+
+options=()
+
+while read line; do options+=( "$line" ); done\
+< <(git for-each-ref --format='%(refname:short)' refs/heads/)
+
+options+=('Exit')
+
+select opt in "${options[@]}"
+do
+	if [[ "$opt" ]] && [[ "$opt" == 'Exit' ]]; then
+		exit 0
+	elif [[ "$opt" ]]; then
+		git checkout "$opt"
+	else
+		echo "bad input"
+	fi
+done

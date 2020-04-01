@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# use '. cd2 arg' to be able to change directories!
+
+if [ "$1" == "home" ]; then cd ~; fi
+

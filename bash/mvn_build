@@ -1,0 +1,25 @@
+#!/bin/bash
+
+projects=""
+skiptests=""
+
+# edit p1, p2, ... as needed
+
+if [[ "$*" == *p1* ]]
+then
+	projects+="p1-full-name"
+fi
+
+
+if [[ "$*" == *p2* ]]
+then
+	projects+=",p2-full-name"
+fi
+
+if [[ "$*" == *skiptests* ]]
+then
+	skiptests="-Dmaven.test.skip=true"
+fi
+
+echo "mvn clean install $skiptests -pl $projects"
+mvn clean install $skiptests -pl $projects
